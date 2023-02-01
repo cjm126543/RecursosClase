@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris diam dolor, tincidunt in fermentum non, <br/>
+        maximus ut nisl. Quisque accumsan, est in sodales aliquam, diam leo vehicula velit, nec accumsan eros <br/>
+        tortor vitae metus. Suspendisse fringilla tellus massa, ut aliquam lectus hendrerit non. Vivamus ut pulvinar <br/>
+        nibh. Pellentesque et laoreet enim. Quisque convallis commodo elit, vitae facilisis erat pretium at. Sed <br/>
+        mauris quam, pharetra at tortor ac, consectetur dictum dolor. In convallis lacus eget felis fermentum, a <br/>
+        laoreet nisi interdum. In neque leo, pretium non euismod vel, semper sit amet enim. Curabitur eget egestas <br/>
+        orci. Proin facilisis nec tortor viverra vestibulum. Morbi eleifend metus et tortor lobortis ullamcorper. <br/>
+        Nullam at iaculis tellus, vel tempor lacus. Nullam a velit ligula. Donec eget ornare augue. Nullam eu dictum <br/>
+        turpis. <br/>
+    </p>
+        <pre>
+    public static void fileCopy( File in, File out ) throws IOException
+    {
+        FileChannel inChannel = new FileInputStream( in ).getChannel();
+        FileChannel outChannel = new FileOutputStream( out ).getChannel();
+        try
+        {
+//          inChannel.transferTo(0, inChannel.size(), outChannel);      // original -- apparently has trouble copying large files on Windows
+ 
+            // magic number for Windows, 64Mb - 32Kb)
+            int maxCount = (64 * 1024 * 1024) - (32 * 1024);
+            long size = inChannel.size();
+            long position = 0;
+            while ( position < size )
+            {
+               position += inChannel.transferTo( position, maxCount, outChannel );
+            }
+        }
+        finally
+        {
+            if ( inChannel != null )
+            {
+               inChannel.close();
+            }
+            if ( outChannel != null )
+            {
+                outChannel.close();
+            }
+        }
+    }
+        </pre>
+    <p>
+
+    </p>
+
+    <p>
+        Quisque nisl mauris, facilisis vitae suscipit eget, bibendum non lectus. Maecenas congue mi a tellus iaculis, <br/>
+        a eleifend mi varius. Nullam vel volutpat lorem, vel rutrum dolor. Nam id facilisis dolor, ac vulputate est. <br/>
+        Phasellus porttitor id libero vel lacinia. In vel sodales nisi. Vestibulum efficitur, arcu a placerat interdum, <br/>
+        ligula dui sollicitudin mauris, ut aliquam odio elit facilisis nibh. Pellentesque facilisis massa quis nunc <br/>
+        posuere sagittis. Proin commodo cursus urna, dictum dapibus lorem hendrerit quis. Ut sagittis turpis sed mi <br/>
+        tincidunt, in consequat velit eleifend. Duis consectetur dui ut mauris vestibulum blandit. Curabitur arcu est, <br/>
+        bibendum imperdiet bibendum ut, consequat et quam. Etiam eu commodo risus, ac pulvinar dui. Duis consectetur <br/>
+        tellus mauris, sed viverra dui convallis sed. Duis enim leo, efficitur sed diam a, molestie mattis lectus. Mauris <br/>
+        nec velit quis erat aliquet facilisis. <br/>
+    </p>
+</body>
+</html>
