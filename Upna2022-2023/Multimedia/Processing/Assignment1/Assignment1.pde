@@ -81,7 +81,7 @@ class Circle{
     circle(x,y,rad*2);
   }
   boolean isInside(float px, float py) { return dist(px,py,this.x,this.y) < rad; }
-  boolean isInside(Circle o) { return dist(this.x,this.y,o.x,o.y) < this.rad+o.rad;}
+  boolean isInside(Circle o) { return dist(this.x,this.y,o.x,o.y) < this.rad+o.rad; }
 }
 Circle pickCircle(ArrayList<Circle> cs, float x, float y){
   for (Circle c : cs)
@@ -108,7 +108,17 @@ void addRandomCircles(ArrayList<Circle> circles, int n){
 }
 
 
-
+class Line {
+  float x1, y1, x2, y2;
+  Circle c;
+  public Line(float x1, float y1, Circle c) {
+    this.x1 = x1;
+    this.y1 = y1;
+    this.x2 = c.x;
+    this.y2 = c.y;
+    this.c = c;
+  }
+}
 
 
 class PointingMethod{
@@ -125,28 +135,41 @@ class PointingMethod{
 }
 
 class BubbleCursor extends PointingMethod{
-  final int minDist = 200;
-  Circle nc;
+  final int minDist = 400;
+  float outerCircleDist = 0.0;
   float r = 0.0;
+  Circle nc, oc;
+  Line l;
   
-  void draw(ArrayList<Circle> cursor) {
+  void draw(ArrayList<Circle> circles) {
     
-    // Pick nearest circle
-    nc = pickNearestCircle(cursor);
+    // Pick nearest circle and distance of the outer circle
+    nc = pickNearestCircle(circles);
+    outerCircleDist = dist(mouseX, mouseY, nc.x, nc.y) * 2 + nc.rad * 2;
     
     // Draw transparent circle
     fill(50, 50, 50, 50);
     stroke(0);
     strokeWeight(2);
-    if ((dist(mouseX, mouseY, nc.x, nc.y) * 2 + nc.rad * 2) > 200) {
-      noFill();
-    } else {
-      circle(mouseX, mouseY, (dist(mouseX, mouseY, nc.x, nc.y) * 2 + nc.rad * 2));
+    if (outerCircleDist <= minDist) {
+      circle(mouseX, mouseY, outerCircleDist);
+      line(mouseX, mouseY, nc.x, nc.y);
+      l = new Line(mouseX, mouseY, nc);
     }
     
     // Draw crosshair
     strokeWeight(1);
     drawCrossHair(mouseX, mouseY);
+    
+  }
+  
+  // When outerCircle aims towards the objective, if clicked then call onClick()
+  Circle onClick(ArrayList<Circle> circles, float x, float y) {
+    if (nc.equals(l.c) && nc.isTarget) {
+      return pickCircle(circles, nc);
+    } else {
+      return null;
+    }
   }
   
   Circle pickNearestCircle(ArrayList<Circle> arr) {
@@ -154,7 +177,7 @@ class BubbleCursor extends PointingMethod{
     for (Circle c: arr) {
       
       if (dist(mouseX, mouseY, c.x, c.y) < dist(mouseX, mouseY, min.x, min.y)) {
-        min = c ;
+        min = c;
       }
     }
     

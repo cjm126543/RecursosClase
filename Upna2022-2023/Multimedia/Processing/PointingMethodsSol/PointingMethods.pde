@@ -1,4 +1,4 @@
-PointingMethod method = new NinjaCursor(); //change here for other methods: SimpleCursor, KeyboardCtrl, NinjaCursor
+PointingMethod method = new BubbleCursor(); //change here for other methods: SimpleCursor, KeyboardCtrl, NinjaCursor
 final int N_TRIALS = 20;
 final float MIN_RAD = 8, MAX_RAD = 50;
 
@@ -158,42 +158,65 @@ class KeyboardCtrl extends PointingMethod{ //ASDW for fast movement, direction k
   }
 }
 
-class NinjaCursor extends PointingMethod{
-  final float DIST = 200;
-  final float[][] OFFSETS = {{-DIST,0}, {DIST,0}, {0,DIST}, {0,-DIST}};
-  int iCursor = 0;
+class NinjaCursor extends PointingMethod {
+  final float RELATIVE_POS = 200;
+  final float[][] CURSOR_OFFSET = {{-RELATIVE_POS, 0}, {RELATIVE_POS, 0}, {0, RELATIVE_POS}, {0, -RELATIVE_POS}};
+  int selectedCursor = 0;
   
-  void draw(ArrayList<Circle> cs){
-      stroke(cd);
-      for(float[] p : OFFSETS){
-        drawCrossHair(mouseX + p[0],mouseY + p[1]);
-      }
-      
-      stroke(0);
-      strokeWeight(4);
-      drawCrossHair(mouseX + OFFSETS[iCursor][0],mouseY + OFFSETS[iCursor][1]);
+  void draw(ArrayList<Circle> cursor) {
+    stroke(cd);
+    for (float[] pointer : CURSOR_OFFSET) {
+      drawCrossHair(mouseX + pointer[0], mouseY + pointer[1]);
     }
     
-    Circle onClick(ArrayList<Circle> cs, float x, float y){
-      /*for(float[] p : OFFSETS){
-        Circle c = pickCircle(cs, mouseX+p[0], mouseY+p[1]);
-        if (c != null) {return c;}
-      }
-      return null;
-      */
-      return pickCircle(cs, mouseX+OFFSETS[iCursor][0], mouseY+OFFSETS[iCursor][1]);
-    }
-    
-    Circle onKey(ArrayList<Circle> cs, int k, int ck, boolean pressingDown){
-      if (ck == LEFT ) {iCursor = 0;}
-      else if (ck == RIGHT) { iCursor = 1;}
-      else if (ck == DOWN) { iCursor = 2;}
-      else if (ck == UP) { iCursor = 3;}
-    
-      return null;
-    }
+    stroke(0);
+    strokeWeight(2);
+    drawCrossHair(mouseX + CURSOR_OFFSET[selectedCursor][0], mouseY + CURSOR_OFFSET[selectedCursor][1]);
+  }
+  
+  Circle onClick(ArrayList<Circle> cursor, float x, float y) {
+    return pickCircle(cursor, mouseX + CURSOR_OFFSET[selectedCursor][0], mouseY + CURSOR_OFFSET[selectedCursor][1]); 
+  }
+  
+  Circle onKey(ArrayList<Circle> cursor, int num, int selKey, boolean isPressed) {
+    if (selKey == LEFT) selectedCursor = 0;
+    if (selKey == RIGHT) selectedCursor = 1;
+    if (selKey == UP) selectedCursor = 3;
+    if (selKey == DOWN) selectedCursor = 2;
+    return null;
+  }
 }
 
 class BubbleCursor extends PointingMethod{
+  float x, y = 100;
   
+  void draw(ArrayList<Circle> cursor) {
+    fill(0);
+    stroke(0);
+    strokeWeight(2);
+    drawCrossHair(x, y);
+    stroke(0);
+    strokeWeight(2);
+    drawCrossHair(mouseX, mouseY);
+  }
+  
+  Circle onKey(ArrayList<Circle> cursor, int num, int selKey, boolean isPressed) {
+    final float speedKey = 5;
+    if (selKey == 'a' || selKey == 'A') x -= speedKey;
+    if (selKey == 'd' || selKey == 'D') x += speedKey;
+    if (selKey == 'w' || selKey == 'W') y -= speedKey;
+    if (selKey == 's' || selKey == 'S') y += speedKey;
+    
+    if (isPressed && num == ' ') {
+      return pickCircle(cursor, x, y); 
+    }
+    
+    return null;
+  }
+  
+  Circle onClick(ArrayList<Circle> cursor, float x, float y) {
+    Circle c = pickCircle(cursor, mouseX, mouseY);
+    if (c != null) return c;
+    return null;
+  }
 }
