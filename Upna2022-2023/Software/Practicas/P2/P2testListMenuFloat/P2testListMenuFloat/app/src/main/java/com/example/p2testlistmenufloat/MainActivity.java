@@ -1,3 +1,9 @@
+/*
+Errores práctica:
+	- A partir del elemento 3 no reacciona a pulsar.
+	- Reload añade una nueva fila cuando no deberia.
+ */
+
 package com.example.p2testlistmenufloat;
 
 import android.content.Intent;
@@ -23,6 +29,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private final int SHOW_ADDACTIVITY = 3;
     ListView listView;
     ArrayAdapter<String> todoItemsAdapter;
     public List<String> nameList = new ArrayList<>();
@@ -63,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SHOW_ADDACTIVITY && resultCode == SHOW_ADDACTIVITY) {
+            String msg = data.getStringExtra("msg");
+            nameList.add(msg);
+            todoItemsAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

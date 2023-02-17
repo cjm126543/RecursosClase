@@ -35,8 +35,8 @@
 
     <ListView
         android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="586dp"
+        android:layout_width="367dp"
+        android:layout_height="459dp"
         android:visibility="visible"
         app:layout_anchor="@+id/include2"
         app:layout_anchorGravity="center" />
