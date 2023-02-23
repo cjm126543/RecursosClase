@@ -135,7 +135,7 @@ class PointingMethod{
 }
 
 class BubbleCursor extends PointingMethod{
-  final int minDist = 400;
+  final int minDist = 200;
   float outerCircleDist = 0.0;
   float r = 0.0;
   Circle nc, oc;
@@ -151,7 +151,7 @@ class BubbleCursor extends PointingMethod{
     fill(50, 50, 50, 50);
     stroke(0);
     strokeWeight(2);
-    if (outerCircleDist <= minDist) {
+    if (dist(mouseX, mouseY, nc.x, nc.y) <= minDist) {
       circle(mouseX, mouseY, outerCircleDist);
       line(mouseX, mouseY, nc.x, nc.y);
       l = new Line(mouseX, mouseY, nc);
