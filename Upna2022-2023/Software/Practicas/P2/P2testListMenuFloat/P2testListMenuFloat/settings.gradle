@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "P2testListMenuFloat"
+rootProject.name = "testListMVCMenuFloat"
 include ':app'

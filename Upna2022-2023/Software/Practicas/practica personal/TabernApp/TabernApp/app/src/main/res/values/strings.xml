@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TabernApp</string>
+    <string name="panes">Panes</string>
+    <string name="campesina">Campesina</string>
+    <string name="chapata">Chapata</string>
+    <string name="integral">Integral</string>
+    <string name="hogaza">Hogaza</string>
+    <string name="inventario">Inventario: </string>
+    <string name="preparacion">Preparacion:  </string>
+</resources>

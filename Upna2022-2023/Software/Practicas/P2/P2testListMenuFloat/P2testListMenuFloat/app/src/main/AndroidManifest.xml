@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.p2testlistmenufloat">
+    package="com.example.testListMVCMenuFloat">
 
     <application
+        android:name="com.example.testListMVCMenuFloat.TravelPointsApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,13 +15,10 @@
         android:theme="@style/Theme.P2testListMenuFloat"
         tools:targetApi="31">
         <activity
-            android:name=".AddNameActivity"
+            android:name="com.example.testListMVCMenuFloat.DisplayActivity"
             android:exported="false" />
         <activity
-            android:name=".DisplayActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name="com.example.testListMVCMenuFloat.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.P2testListMenuFloat.NoActionBar">
