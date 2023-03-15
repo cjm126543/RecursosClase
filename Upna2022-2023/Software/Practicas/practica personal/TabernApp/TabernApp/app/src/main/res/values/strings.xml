@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">TabernApp</string>
-    <string name="panes">Panes</string>
-    <string name="campesina">Campesina</string>
-    <string name="chapata">Chapata</string>
-    <string name="integral">Integral</string>
-    <string name="hogaza">Hogaza</string>
     <string name="inventario">Inventario: </string>
     <string name="preparacion">Preparacion:  </string>
+    <string name="nueva_direccion">Añadir direccion</string>
+    <string name="lista_direcciones">Mis direcciones</string>
+    <string name="mostrar_carrito">Ir al carrito</string>
+    <string name="info_dialog">Introduzca los datos</string>
+    <string name="start">Confirmar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="name">Nombre de la direccion</string>
+    <string name="road">Calle</string>
+    <string name="postal">Codigo postal</string>
 </resources>

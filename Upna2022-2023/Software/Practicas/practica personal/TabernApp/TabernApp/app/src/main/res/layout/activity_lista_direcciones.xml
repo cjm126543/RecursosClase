@@ -8,20 +8,20 @@
     tools:context=".Catalogo">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/appbar_dir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include
-        android:id="@+id/include2"
+        android:id="@+id/include2_dir"
         layout="@layout/content_main"
         app:layout_anchor="@+id/list"
         app:layout_anchorGravity="center" />
 
     <ListView
-        android:id="@+id/listCatalogue"
+        android:id="@+id/list_Dir"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

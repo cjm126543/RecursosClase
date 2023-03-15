@@ -44,6 +44,6 @@ public class Direccion {
     // Java language methods
     @Override
     public String toString() {
-        return this.getNombre();
+        return this.getNombre() + " " + this.getCalle();
     }
 }

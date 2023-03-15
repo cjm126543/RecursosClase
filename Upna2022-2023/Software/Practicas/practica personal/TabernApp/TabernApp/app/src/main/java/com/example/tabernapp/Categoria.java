@@ -17,8 +17,11 @@ import android.widget.TextView;
 import com.example.tabernapp.Models.Item;
 import com.example.tabernapp.Models.Tipo;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Categoria extends AppCompatActivity {
 
@@ -55,12 +58,24 @@ public class Categoria extends AppCompatActivity {
         TextView card1Title, card2Title, card3Title, card4Title;
         TextView card1Stock, card2Stock, card3Stock, card4Stock;
         TextView card1Ready, card2Ready, card3Ready, card4Ready;
-        ImageView header;
+        TextView title;
+        ImageView header, logo;
         ImageButton imgBtn1, imgBtn2, imgBtn3, imgBtn4;
 
         // Retrieve all category values
         app.startCategory(categoryType);
         List<Item> category = app.getCategoria();
+
+        // Logo image manipulation
+        logo = (ImageView) findViewById(R.id.imgvCategoria);
+        int lg = getResources().getIdentifier("@drawable/" + categoryType.name().toLowerCase()
+                                                + "_logo", null, getPackageName());
+        Drawable lgImg = getResources().getDrawable(lg);
+        logo.setImageDrawable(lgImg);
+
+        // Category text manipulation
+        title = (TextView) findViewById(R.id.textCategoria);
+        title.setText(categoryType.name().toLowerCase());
 
         // Product name manipulation
         card1Title = (TextView) findViewById(R.id.textElem1);
@@ -96,13 +111,14 @@ public class Categoria extends AppCompatActivity {
         int val4 = category.get(3).getCantPreparando();
 
         if (val1 != -1) card1Ready.setText("Preparacion: " + Integer.toString(val1));
-        if (val2 != -1) card1Ready.setText("Preparacion: " + Integer.toString(val2));
-        if (val3 != -1) card1Ready.setText("Preparacion: " + Integer.toString(val3));
-        if (val4 != -1) card1Ready.setText("Preparacion: " + Integer.toString(val4));
+        if (val2 != -1) card2Ready.setText("Preparacion: " + Integer.toString(val2));
+        if (val3 != -1) card3Ready.setText("Preparacion: " + Integer.toString(val3));
+        if (val4 != -1) card4Ready.setText("Preparacion: " + Integer.toString(val4));
 
         // Header image manipulation
         header = (ImageView) findViewById(R.id.imgvCabecera);
-        int hdr = getResources().getIdentifier("@drawable/" + categoryType.name().toLowerCase() + "_cabecera", null, getPackageName());
+        int hdr = getResources().getIdentifier("@drawable/" +
+                categoryType.name().toLowerCase() + "_cabecera", null, getPackageName());
         Drawable hdrImg = getResources().getDrawable(hdr);
         header.setImageDrawable(hdrImg);
 
@@ -112,10 +128,14 @@ public class Categoria extends AppCompatActivity {
         imgBtn3 = (ImageButton) findViewById(R.id.imgb3);
         imgBtn4 = (ImageButton) findViewById(R.id.imgb4);
 
-        int crd1 = getResources().getIdentifier("@drawable/" + categoryType.name().toLowerCase() + "_card1", null, getPackageName());
-        int crd2 = getResources().getIdentifier("@drawable/" + categoryType.name().toLowerCase() + "_card2", null, getPackageName());
-        int crd3 = getResources().getIdentifier("@drawable/" + categoryType.name().toLowerCase() + "_card3", null, getPackageName());
-        int crd4 = getResources().getIdentifier("@drawable/" + categoryType.name().toLowerCase() + "_card4", null, getPackageName());
+        int crd1 = getResources().getIdentifier("@drawable/" +
+                categoryType.name().toLowerCase() + "_card1", null, getPackageName());
+        int crd2 = getResources().getIdentifier("@drawable/" +
+                categoryType.name().toLowerCase() + "_card2", null, getPackageName());
+        int crd3 = getResources().getIdentifier("@drawable/" +
+                categoryType.name().toLowerCase() + "_card3", null, getPackageName());
+        int crd4 = getResources().getIdentifier("@drawable/" +
+                categoryType.name().toLowerCase() + "_card4", null, getPackageName());
 
         Drawable img1 = getResources().getDrawable(crd1);
         Drawable img2 = getResources().getDrawable(crd2);

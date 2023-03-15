@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="50dp"
-            android:text="@string/chapata" />
+            android:text="chapata" />
 
         <ImageButton
             android:id="@+id/imgb1"
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="50dp"
-            android:text="@string/campesina" />
+            android:text="campesina" />
 
         <ImageButton
             android:id="@+id/imgb2"
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="50dp"
-            android:text="@string/integral" />
+            android:text="integral" />
 
         <ImageButton
             android:id="@+id/imgb3"
@@ -163,7 +163,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card3" >
+        app:layout_constraintTop_toBottomOf="@+id/card3">
 
         <TextView
             android:id="@+id/textPrep4"
@@ -187,7 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="50dp"
-            android:text="@string/hogaza" />
+            android:text="hogaza" />
 
         <ImageButton
             android:id="@+id/imgb4"
@@ -206,5 +206,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/pan_cabecera" />
+
+    <ImageView
+        android:id="@+id/imgvCategoria"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="151dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="152dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/textCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="178dp"
+        android:layout_marginBottom="18dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/card1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgvCategoria" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

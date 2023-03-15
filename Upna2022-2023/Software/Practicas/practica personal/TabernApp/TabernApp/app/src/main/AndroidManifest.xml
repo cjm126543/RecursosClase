@@ -15,6 +15,9 @@
         android:theme="@style/Theme.TabernApp"
         tools:targetApi="31">
         <activity
+            android:name=".ListaDirecciones"
+            android:exported="false" />
+        <activity
             android:name=".Categoria"
             android:exported="false" />
         <activity

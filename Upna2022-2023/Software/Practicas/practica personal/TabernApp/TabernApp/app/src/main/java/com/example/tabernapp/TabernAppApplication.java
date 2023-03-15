@@ -2,6 +2,7 @@ package com.example.tabernapp;
 
 import android.app.Application;
 
+import com.example.tabernapp.Models.Direccion;
 import com.example.tabernapp.Models.Item;
 import com.example.tabernapp.Models.Tipo;
 
@@ -14,6 +15,7 @@ public class TabernAppApplication extends Application {
     // Lists and arrays that contains the app
     private List<Item> catalogo = new ArrayList<>();
     private List<Item> categoria = new ArrayList<>();
+    private List<Direccion> direcciones = new ArrayList<>();
     Tipo[] tipo = {Tipo.PAN, Tipo.REPOSTERIA, Tipo.LACTEO, Tipo.REFRESCO, Tipo.SNACK, Tipo.CAFE, Tipo.EXTRA};
 
     @Override
@@ -27,6 +29,7 @@ public class TabernAppApplication extends Application {
         return catalogo;
     }
     public List<Item> getCategoria() { return categoria; }
+    public List<Direccion> getDirecciones() { return direcciones; }
 
     // Class methods
     /**
@@ -86,5 +89,27 @@ public class TabernAppApplication extends Application {
         }
     }
 
+    /**
+     * Adds a new direction to the application list.
+     * @param dir Direction to add
+     * @return True if direction doesn't exist and it's added, false otherwise
+     */
+    public boolean addDirection(Direccion dir) {
+        if (!direcciones.contains(dir)) {
+            direcciones.add(dir);
+            return true;
+        }
+        return false;
+    }
 
+    /**
+     * Removes a given direction.
+     * @param dir Direction to delete
+     * @return The desired deleted direction, null if it's not in the collection
+     */
+    public Direccion removeDirection(Direccion dir) {
+        if (!direcciones.contains(dir)) return null;
+        direcciones.remove(dir);
+        return dir;
+    }
 }

@@ -1,11 +1,14 @@
 package com.example.tabernapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,7 +29,7 @@ public class Catalogo extends AppCompatActivity {
     // View components
     TabernAppApplication app;
     ListView listView;
-    ArrayAdapter<Item> catalogueItemsAdapter;
+    ListAdapterCustom catalogueItemsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,7 @@ public class Catalogo extends AppCompatActivity {
         // List
         listView = (ListView) findViewById(R.id.listCatalogue);
         app = (TabernAppApplication) getApplicationContext();
-        catalogueItemsAdapter = new ArrayAdapter<Item>(this, R.layout.row_layout, R.id.listText, app.getCatalogo());
+        catalogueItemsAdapter = new ListAdapterCustom(this, app.getCatalogo());
         listView.setAdapter(catalogueItemsAdapter);
 
         // Item from list listener
@@ -58,9 +61,32 @@ public class Catalogo extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_new_dir: {
+                DialogFragment newFragment = new InputDireccion();
+                newFragment.show(getSupportFragmentManager(), "nueva_direccion");
+                break;
+            }
+
+            case R.id.action_list_dir: {
+                Intent intent = new Intent(Catalogo.this, ListaDirecciones.class);
+                startActivityForResult(intent, START_OK);
+                break;
+            }
+
+            case R.id.action_show_cart: {
+                // TODO Llamar a actividad de compra
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // TODO
     }
 }
