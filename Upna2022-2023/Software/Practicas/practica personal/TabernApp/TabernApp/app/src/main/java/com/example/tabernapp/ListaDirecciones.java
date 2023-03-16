@@ -22,7 +22,7 @@ public class ListaDirecciones extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_direcciones);
+        setContentView(R.layout.lista_direcciones_view);
 
         // List
         listView = (ListView) findViewById(R.id.list_Dir);

@@ -11,4 +11,5 @@
     <string name="name">Nombre de la direccion</string>
     <string name="road">Calle</string>
     <string name="postal">Codigo postal</string>
+    <string name="quantity">Cantidad</string>
 </resources>

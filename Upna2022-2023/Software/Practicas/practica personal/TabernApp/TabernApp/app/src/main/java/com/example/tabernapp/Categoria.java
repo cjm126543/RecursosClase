@@ -3,6 +3,8 @@ package com.example.tabernapp;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.DialogFragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,8 +51,43 @@ public class Categoria extends AppCompatActivity {
 
         displayCategory(selectedItem.getTipo());
 
+        // Click a card image button
+        CardView card1 = (CardView) findViewById(R.id.card1);
+        CardView card2 = (CardView) findViewById(R.id.card2);
+        CardView card3 = (CardView) findViewById(R.id.card3);
+        CardView card4 = (CardView) findViewById(R.id.card4);
+
+        card1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment newFragment = new InputCantidad();
+                newFragment.show(getSupportFragmentManager(), "pedir_cantidad");
+            }
+        });
+        card2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment newFragment = new InputCantidad();
+                newFragment.show(getSupportFragmentManager(), "pedir_cantidad");
+            }
+        });
+        card3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment newFragment = new InputCantidad();
+                newFragment.show(getSupportFragmentManager(), "pedir_cantidad");
+            }
+        });
+        card4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment newFragment = new InputCantidad();
+                newFragment.show(getSupportFragmentManager(), "pedir_cantidad");
+            }
+        });
     }
 
+    // Custom activity methods
     /**
      * Displays the specified category in the layout.
      * @param categoryType category to implement
