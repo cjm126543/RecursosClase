@@ -34,8 +34,8 @@ insert into tabernaUser.articuloPedido(idArticulo_fg, cantidadArticulo) values(6
 insert into tabernaUser.articuloPedido(idArticulo_fg, cantidadArticulo) values(10, 2);
 
 /* PEDIDO */
-insert into tabernaUser.pedido(direccionEntrega_fg) values(1)
-insert into tabernaUser.pedido(direccionEntrega_fg) values(2)
+insert into tabernaUser.pedido(direccionEntrega_fg) values(1);
+insert into tabernaUser.pedido(direccionEntrega_fg) values(2);
 
 /* LINEASPEDIDO */
 insert into tabernaUser.lineasPedido(idLinea, idPedido) values(1, 1);

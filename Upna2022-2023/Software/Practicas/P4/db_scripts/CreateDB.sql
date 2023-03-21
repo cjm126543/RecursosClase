@@ -54,6 +54,6 @@ create table tabernaUser.lineasPedido (
 	idLinea int not null,
 	idPedido int not null,
 	constraint pk_lineas_pedido primary key(idLinea, idPedido),
-	foreign key(idLinea) reference tabernaUser.articuloPedido(idLinea),
-	foreign key(idPedido) reference tabernaUser.pedido(idPedido)
+	foreign key(idLinea) references tabernaUser.articuloPedido(idLinea),
+	foreign key(idPedido) references tabernaUser.pedido(idPedido)
 );
