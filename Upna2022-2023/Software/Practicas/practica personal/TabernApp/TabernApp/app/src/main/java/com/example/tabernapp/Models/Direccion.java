@@ -1,7 +1,5 @@
 package com.example.tabernapp.Models;
 
-import androidx.annotation.NonNull;
-
 public class Direccion {
 
     // Attributes

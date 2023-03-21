@@ -1,10 +1,5 @@
 package com.example.tabernapp.Models;
 
-import android.annotation.SuppressLint;
-
-import java.util.Optional;
-import java.util.OptionalInt;
-
 /**
  * Whenever an id attributed is not associated to any machine,
  * its value defaults to -1.

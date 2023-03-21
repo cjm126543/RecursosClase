@@ -8,12 +8,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.tabernapp.Models.Pedido;
 
 public class InputCantidad extends DialogFragment {
 
@@ -24,16 +23,21 @@ public class InputCantidad extends DialogFragment {
     final int ERROR = -1;
 
     EditText cantidad;
-    TextView articulo;
 
+    Categoria parent;
     Activity activity;
     TabernAppApplication app;
+    Pedido basket;
+
+    // Constructor
+    public InputCantidad(Categoria activity) { this.parent = activity; }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Activity variables used to manipulate the activity who calls the dialog
         activity = getActivity();
         app = (TabernAppApplication) activity.getApplicationContext();
+        basket = app.getCesta();
 
         // Dialog manipulation
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -45,13 +49,16 @@ public class InputCantidad extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         cantidad = (EditText) v.findViewById(R.id.quantity);
-                        int quant = Integer.parseInt(cantidad.getText().toString());
+                        int prev = basket.getCantidadArticulo(app.getCategoria().get(parent.getCard()));
+                        int quant = 0;
+                        String cant = cantidad.getText().toString();
+                        if (!cant.isEmpty()) {
+                            quant = prev + Integer.parseInt(cant);
+                        }
 
-                        // TODO llamar a nueva actividad carrito
-                        Bundle bundle = new Bundle();
-                        bundle.putInt("requested_quantity", quant);
+                        // Add item to basket
+                        app.updateCesta(app.getCategoria().get(parent.getCard()), quant);
                         Intent intent = new Intent(activity, Compra.class);
-                        intent.putExtras(bundle);
                         startActivityForResult(intent, START_OK);
 
                         // Check terminating status

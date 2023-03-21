@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.tabernapp.Models.Direccion;
 import com.example.tabernapp.Models.Item;
+import com.example.tabernapp.Models.Pedido;
 import com.example.tabernapp.Models.Tipo;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class TabernAppApplication extends Application {
     private List<Item> catalogo = new ArrayList<>();
     private List<Item> categoria = new ArrayList<>();
     private List<Direccion> direcciones = new ArrayList<>();
+    private Pedido cesta = new Pedido();
     Tipo[] tipo = {Tipo.PAN, Tipo.REPOSTERIA, Tipo.LACTEO, Tipo.REFRESCO, Tipo.SNACK, Tipo.CAFE, Tipo.EXTRA};
 
     @Override
@@ -30,6 +32,7 @@ public class TabernAppApplication extends Application {
     }
     public List<Item> getCategoria() { return categoria; }
     public List<Direccion> getDirecciones() { return direcciones; }
+    public Pedido getCesta() { return cesta; }
 
     // Class methods
     /**
@@ -111,5 +114,31 @@ public class TabernAppApplication extends Application {
         if (!direcciones.contains(dir)) return null;
         direcciones.remove(dir);
         return dir;
+    }
+
+    /**
+     * Adds a new item to the basket with its quantity. Also updates the desired quantity
+     * if the passed item already exists.
+     * @param articulo Item to be added or updated
+     * @param cantidad Quantity of the desired item
+     */
+    public void updateCesta(Item articulo, int cantidad) {
+        cesta.addArticulo(articulo, cantidad);
+    }
+
+    /**
+     * Deletes an item from the basket if there are no instances of it.
+     * @param articulo Item to be deleted
+     * @return the deleted item, null if there is no coincidence.
+     */
+    public Item removeFromCesta(Item articulo) {
+        return cesta.removeArticulo(articulo);
+    }
+
+    /**
+     * Clears the basket.
+     */
+    public void removeAllFromCesta() {
+        cesta.removeAll();
     }
 }

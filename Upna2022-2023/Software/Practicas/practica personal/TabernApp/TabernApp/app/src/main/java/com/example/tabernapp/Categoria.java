@@ -1,16 +1,10 @@
 package com.example.tabernapp;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -20,11 +14,8 @@ import android.widget.TextView;
 import com.example.tabernapp.Models.Item;
 import com.example.tabernapp.Models.Tipo;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class Categoria extends AppCompatActivity {
 
@@ -33,9 +24,11 @@ public class Categoria extends AppCompatActivity {
 
     // Application data manipulation structures
     List<Item> catalogue = new ArrayList<>();
+    List<Item> category = new ArrayList<>();
     Item selectedItem;
     Bundle bundle;
     int pos;
+    int cardSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,28 +53,64 @@ public class Categoria extends AppCompatActivity {
         card1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new InputCantidad();
+                // Instance (if not done it yet) the item in the basket
+                int cantidad;
+                if (!app.getCesta().getAllArticulos().containsKey(category.get(0))) {
+                    cantidad = 0;
+                } else {
+                    cantidad = app.getCesta().getCantidadArticulo(category.get(0));
+                }
+                app.updateCesta(category.get(0), cantidad);
+                cardSelected = 0;
+                DialogFragment newFragment = new InputCantidad(Categoria.this);
                 newFragment.show(getSupportFragmentManager(), "pedir_cantidad");
             }
         });
         card2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new InputCantidad();
+                // Instance (if not done it yet) the item in the basket
+                int cantidad;
+                if (!app.getCesta().getAllArticulos().containsKey(category.get(1))) {
+                    cantidad = 0;
+                } else {
+                    cantidad = app.getCesta().getCantidadArticulo(category.get(1));
+                }
+                app.updateCesta(category.get(1), cantidad);
+                cardSelected = 1;
+                DialogFragment newFragment = new InputCantidad(Categoria.this);
                 newFragment.show(getSupportFragmentManager(), "pedir_cantidad");
             }
         });
         card3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new InputCantidad();
+                // Instance (if not done it yet) the item in the basket
+                int cantidad;
+                if (!app.getCesta().getAllArticulos().containsKey(category.get(2))) {
+                    cantidad = 0;
+                } else {
+                    cantidad = app.getCesta().getCantidadArticulo(category.get(2));
+                }
+                app.updateCesta(category.get(2), cantidad);
+                cardSelected = 2;
+                DialogFragment newFragment = new InputCantidad(Categoria.this);
                 newFragment.show(getSupportFragmentManager(), "pedir_cantidad");
             }
         });
         card4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new InputCantidad();
+                // Instance (if not done it yet) the item in the basket
+                int cantidad;
+                if (!app.getCesta().getAllArticulos().containsKey(category.get(3))) {
+                    cantidad = 0;
+                } else {
+                    cantidad = app.getCesta().getCantidadArticulo(category.get(3));
+                }
+                app.updateCesta(category.get(3), cantidad);
+                cardSelected = 3;
+                DialogFragment newFragment = new InputCantidad(Categoria.this);
                 newFragment.show(getSupportFragmentManager(), "pedir_cantidad");
             }
         });
@@ -102,7 +131,7 @@ public class Categoria extends AppCompatActivity {
 
         // Retrieve all category values
         app.startCategory(categoryType);
-        List<Item> category = app.getCategoria();
+        category = app.getCategoria();
 
         // Logo image manipulation
         logo = (ImageView) findViewById(R.id.imgvCategoria);
@@ -184,5 +213,14 @@ public class Categoria extends AppCompatActivity {
         imgBtn2.setImageDrawable(img2);
         imgBtn3.setImageDrawable(img3);
         imgBtn4.setImageDrawable(img4);
+    }
+
+    /**
+     * Returns the position of the selected card in order to update the baskets quantity
+     * in the dialog.
+     * @return integer representing the position mentioned
+     */
+    public int getCard() {
+        return cardSelected;
     }
 }

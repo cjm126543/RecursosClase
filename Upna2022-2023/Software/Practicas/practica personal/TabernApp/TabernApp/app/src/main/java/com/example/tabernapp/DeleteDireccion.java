@@ -7,10 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.widget.EditText;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.tabernapp.Models.Direccion;
@@ -26,6 +23,7 @@ public class DeleteDireccion extends DialogFragment {
     Activity activity;
     TabernAppApplication app;
 
+    // Constructor
     public DeleteDireccion(ListaDirecciones activity) {
         this.parent = activity;
     }
