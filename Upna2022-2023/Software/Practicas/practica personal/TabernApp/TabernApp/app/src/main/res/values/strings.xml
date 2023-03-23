@@ -12,4 +12,6 @@
     <string name="road">Calle</string>
     <string name="postal">Codigo postal</string>
     <string name="quantity">Cantidad</string>
+    <string name="cesta">Mi cesta</string>
+    <string name="envio">Direccion de envio:</string>
 </resources>

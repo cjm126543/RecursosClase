@@ -46,6 +46,7 @@ public class InputDireccion extends DialogFragment {
                         cPostal = (EditText) v.findViewById(R.id.postal_code);
                         Direccion new_dir = new Direccion(nombre.getText().toString(),
                                 calle.getText().toString(), cPostal.getText().toString());
+                        app.addDirection(new_dir);
 
                         // Check terminating status
                         int code;

@@ -82,4 +82,11 @@ public class Pedido {
         return key;
     }
 
+    /**
+     * Clears the hashmap in order to start a new basket.
+     */
+    public void removeAll() {
+        cantidadArticulos.clear();
+    }
+
 }

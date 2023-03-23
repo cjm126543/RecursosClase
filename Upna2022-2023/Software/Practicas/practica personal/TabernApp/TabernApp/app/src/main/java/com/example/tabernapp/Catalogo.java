@@ -1,7 +1,5 @@
 package com.example.tabernapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -11,10 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.tabernapp.Models.Item;
+import com.example.tabernapp.Resources.ListAdapterCustom;
 
 
 public class Catalogo extends AppCompatActivity {
@@ -78,7 +75,8 @@ public class Catalogo extends AppCompatActivity {
             }
 
             case R.id.action_show_cart: {
-                // TODO Llamar a actividad de compra
+                Intent intent = new Intent(Catalogo.this, Compra.class);
+                startActivityForResult(intent, START_OK);
                 break;
             }
         }

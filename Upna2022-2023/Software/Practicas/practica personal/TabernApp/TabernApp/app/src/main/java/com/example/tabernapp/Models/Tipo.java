@@ -1,7 +1,5 @@
 package com.example.tabernapp.Models;
 
-import androidx.annotation.NonNull;
-
 public enum Tipo {
     // Enumerate values
     PAN(0),
