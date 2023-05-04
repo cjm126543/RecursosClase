@@ -21,8 +21,6 @@ public class TabernAppApplication extends Application {
     private List<Item> catalogo = new ArrayList<>();
     private List<Item> categoria = new ArrayList<>();
     private List<Direccion> direcciones = new ArrayList<>();
-    private Pedido cesta = new Pedido();
-    Tipo[] tipo = {Tipo.PAN, Tipo.REPOSTERIA, Tipo.LACTEO, Tipo.REFRESCO, Tipo.SNACK, Tipo.CAFE, Tipo.EXTRA};
 
     @Override
     public void onCreate() {
@@ -44,6 +42,10 @@ public class TabernAppApplication extends Application {
 
         startCatalogue();
     }
+
+    // Lists and arrays that contains the app
+    private Pedido cesta = new Pedido();
+    Tipo[] tipo = {Tipo.PAN, Tipo.REPOSTERIA, Tipo.LACTEO, Tipo.REFRESCO, Tipo.SNACK, Tipo.CAFE, Tipo.EXTRA};
 
     // Getters
     public List<Item> getCatalogo() {

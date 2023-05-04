@@ -1,7 +1,5 @@
 package com.example.tabernapp.Models;
 
-import com.parse.ParseObject;
-
 public enum Tipo {
     // Enumerate values
     PAN(0),

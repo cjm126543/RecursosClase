@@ -13,34 +13,34 @@ public class Direccion extends ParseObject {
 
     // Constructor
     public Direccion(String nom, String calle, String cp) {
-        this.nombre = nom;
-        this.calle = calle;
-        this.cPostal = cp;
+        setNombre(nom);
+        setCalle(calle);
+        setcPostal(cp);
     }
 
     // Getters and setters
     public String getNombre() {
-        return nombre;
+        return getString("nombre");
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        put("nombre", nombre);
     }
 
     public String getCalle() {
-        return calle;
+        return getString("calle");
     }
 
     public void setCalle(String calle) {
-        this.calle = calle;
+        put("calle", calle);
     }
 
     public String getcPostal() {
-        return cPostal;
+        return getString("cPostal");
     }
 
     public void setcPostal(String cPostal) {
-        this.cPostal = cPostal;
+        put("cPostal", cPostal);
     }
 
     // Java language methods

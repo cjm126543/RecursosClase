@@ -55,8 +55,28 @@ public class Pedido extends ParseObject {
     }
 
     public int getCantidadArticulo(Item anItem) {
-        return 0;
-    }
+        final List<List<ParseObject>> listaLineas = new ArrayList<>();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Lineas");
+        query.whereEqualTo("item", anItem);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    // no hay error
+                    listaLineas.add(objects);
+                } else {
+                    // hay error
+                }
+            }
+        });
+        List<ParseObject> lineas = new ArrayList<ParseObject>();
+        int cantidad = 0;
+        for (ParseObject linea: lineas) {
+            Linea l = (Linea) linea;
+            cantidad += l.getCantidad();
+        }
+        return cantidad;
+    } // TODO conseguir total de repeticiones de item
 
     /*TODO NO PODEMOS TENER UN HASHMAP, TRABAJAR CON DB*/
 
