@@ -15,3 +15,36 @@
 .titulo{
     margin-bottom: 12px;
 }
+
+.custom-table {
+    margin: 0 auto; /* Center the table */
+    border-collapse: collapse;
+    border-color: #6c757d;
+}
+  
+.custom-table td, .custom-table th {
+    padding: 20px !important; /* Adjust the spacing between cells */
+    border: none; /* Remove borders */
+}
+  
+.custom-table tr:not(:last-child) {
+    margin-bottom: 10px !important; /* Adjust the spacing between rows */
+}
+
+.circle {
+    width: 75px;
+    height: 75px;
+    border-radius: 100% !important;
+    text-align: center;
+    line-height: 75%;
+    padding: 15%;
+    color: rgb(0, 0, 0);
+}
+
+.circle-color {
+    background-color: #8307ff !important;
+}
+
+tbody {
+    border-color: #6c757d !important;
+}

@@ -6,8 +6,8 @@ class homeController
 
     public function __construct()
     {
-        // require_once("/var/www/html/pruebas_Carlos/model/homeModel.php");
-        require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\model\homeModel.php');
+        require_once("/var/www/html/pruebas_Carlos/model/homeModel.php");
+        // require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\model\homeModel.php');
         $this->MODEL = new homeModel();
     }
     public function guardarUsuario($correo, $contraseña)
@@ -45,7 +45,7 @@ class homeController
     function completarListaLineas() {
         $lineas = $this->MODEL->seleccionaAllLineas();
         for ($i = 0; $i < sizeof($lineas); $i++) {
-            echo '<option value="' . $lineas[$i]['label'] . '">' . $lineas[$i]['label'] . ": " . $lineas[$i]['nameA'] . " / " . $lineas[$i]['nameB'] . "</option>\n";
+            echo '<option value="' . $lineas[$i]['linea'] . '">' . $lineas[$i]['label'] . ": " . $lineas[$i]['nameA'] . " / " . $lineas[$i]['nameB'] . "</option>\n";
         }
     }
 }

@@ -3,16 +3,16 @@
 class db
 {
     // CREDENCIALES PARA SERVER APACHE
-    // private $host = "dbserver";
-    // private $dbname = "db_grupo31";
-    // private $user = "grupo31";
-    // private $password = "key8aeYoov";
+    private $host = "dbserver";
+    private $dbname = "db_grupo31";
+    private $user = "grupo31";
+    private $password = "key8aeYoov";
 
     // CREDENCIALES PARA XAMPP LOCAL
-    private $host = "127.0.0.1";
-    private $dbname = "db_grupo31";
-    private $user = "root";
-    private $password = "";
+    // private $host = "127.0.0.1";
+    // private $dbname = "db_grupo31";
+    // private $user = "root";
+    // private $password = "";
 
     public function conexion()
     {

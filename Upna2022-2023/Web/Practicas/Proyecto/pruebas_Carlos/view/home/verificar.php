@@ -1,6 +1,6 @@
 <?php
-// require_once("../../controller/homeController.php");
-require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\controller\homeController.php');
+require_once("/var/www/html/pruebas_Carlos/controller/homeController.php");
+// require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\controller\homeController.php');
 session_start();
 $obj = new homeController();
 $correo = $obj->limpiarCorreo($_POST['correo']);

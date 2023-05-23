@@ -1,14 +1,17 @@
 <?php
-// require_once("../head/head.php");
-require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\view\head\head.php');
+require_once("../head/head.php");
+// require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\view\head\head.php');
 if (!empty($_SESSION['usuario'])) {
     header("Location:panel_control.php");
 }
 ?>
-<script src="../../asset/css/estilos.css"></script>
+<!-- <link rel="stylesheet" href="/proyecto_siw/var/www/html/pruebas_Carlos/asset/css/estilos.css"> -->
+<link rel="stylesheet" href="/pruebas_Carlos/asset/css/estilos.css">
+
 <div class="fondo-login" style="background-color: rgba(0,0,0,0.938);min-height:100vh;padding-top: 50px;">
     <div class="icon">
-        <a href="../../index.php">
+        <!-- <a href="../../index.php"> -->
+        <a href="/pruebas_Carlos/index.php">
             <i class="bi bi-bus-front fill text-white" style="font-size: 50px;margin-bottom: 10px;"></i>
         </a>
     </div>
@@ -45,6 +48,6 @@ if (!empty($_SESSION['usuario'])) {
     </div>
 </div>
 <?php
-// require_once("../head/footer.php");
-require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\view\head\footer.php');
+require_once("../head/footer.php");
+// require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\view\head\footer.php');
 ?>
