@@ -10,12 +10,15 @@
     <!-- CAMBIAR LOS SCRIPTS POR LA DIRECCION EN EL FILEZILLA SERVER -->
     <!-- <script src='\proyecto_siw\pruebas_Carlos\model\homeModelAjax.js'></script>
     <script src='\proyecto_siw\pruebas_Carlos\controller\homeControllerAjax.js'></script>
-    <script src="\proyecto_siw\pruebas_Carlos\controller\lineasControllerAjax.js"></script> -->
+    <script src="\proyecto_siw\pruebas_Carlos\controller\lineasControllerAjax.js"></script>
+    <script src="\proyecto_siw\pruebas_Carlos\controller\planificadorControllerAjax.js"></script> -->
     <script src='/pruebas_Carlos/model/homeModelAjax.js'></script>
     <script src='/pruebas_Carlos/controller/homeControllerAjax.js'></script>
     <script src="/pruebas_Carlos/controller/lineasControllerAjax.js"></script>
+    <script src="/pruebas_Carlos/controller/planificadorControllerAjax.js"></script>
     <script>var homeControllerJs = new homeControllerAjax();</script>
     <script>var lineasControllerJs = new lineasControllerAjax();</script>
+    <script>var planificadorControllerJs = new planificadorControllerAjax();</script>
     <script>var modelo = new homeModelAjax();</script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- <script src="\proyecto_siw\pruebas_Carlos\asset\js\getParadas.js"></script> -->

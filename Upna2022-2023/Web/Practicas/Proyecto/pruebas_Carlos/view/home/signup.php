@@ -5,7 +5,7 @@ if (!empty($_SESSION['usuario'])) {
     header("Location:panel_control.php");
 }
 ?>
-<!-- <link rel="stylesheet" href="/proyecto_siw/var/www/html/pruebas_Carlos/asset/css/estilos.css"> -->
+<!-- <link rel="stylesheet" href="/proyecto_siw/pruebas_Carlos/asset/css/estilos.css"> -->
 <link rel="stylesheet" href="/pruebas_Carlos/asset/css/estilos.css">
 
 <div class="fondo-login" style="background-color: rgba(0,0,0,0.938);min-height:100vh;padding-top: 50px;">

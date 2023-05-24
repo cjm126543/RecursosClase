@@ -1,5 +1,6 @@
 # Transporte_Madrid
-
+## Autores
+Carlos Jimeno Miguel e Ivan Sola Delgado
 
 ## Motivo
 Aplicación de consulta de rutas de transporte público urbano (asíncrono y a tiempo real).
@@ -52,10 +53,13 @@ Aquí podemos registrar como se tratan y estructuran los diferentes datos en la 
 ##### Corregir
 - [ ] Buscador de paradas, integrado en la página de usuarios registrados pero no funciona.
         Recomiendo pasarlo a una página aparte y poder buscar también por nombre.
+- [ ] Version móvil y escritorio no funciona el dropdown del menú.
+- [ ] El planificador de rutas retorna el error: code: "90", description: "Error in lines Expecting value: line 1 column 1 (char 0)"
 ##### Pendiente
 - [ ] Buscador de rutas (sólo de bus) para los usuarios registrados.
 - [ ] Generar PDFs y CSVs sobre las incidencias y PDF con imagen de la ruta calculada.
 - [ ] Gestión de usuarios y CRUD de/por usuarios administradores.
+- [ ] Estilar correctamente con CSS las diferentes webs.
 ##### Novedades
 - (18/04/23 18:33)  Guardado las líneas de bus con éxito en la base de datos.
 - (22/05/23 21:40)  Cambiados los colores de rutas de ida y vuelta enseñadas en el mapa. Cambiados las palabras "IDA" y "VUELTA" por
@@ -64,3 +68,5 @@ Aquí podemos registrar como se tratan y estructuran los diferentes datos en la 
                     Añadida la funcionalidad de seleccionar líneas para consultar su tabla de incidencias (aconsejable informar de cuando no hay).
                     Añadidas las opciones de consultar direcciones para una ruta e información de las paradas (bien clickando en el desplegable suyo
                     en el mapa o buscandola en el buscador) (AÑADIDAS LAS OPCIONES, NO FUNCIONAN, RESTA IMPLEMENTARLAS).
+- (24/05/23 19:17)  Añadida la funcionalidad de "Ver mas" en cada parada. Muestra la direccion postal y las lineas que cruzan por ella. Ocultar oculta
+                    el pop-up y reinicia el valor del mismo.

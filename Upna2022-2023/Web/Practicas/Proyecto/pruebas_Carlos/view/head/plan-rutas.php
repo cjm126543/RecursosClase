@@ -11,9 +11,8 @@
     ?>
 
 <?php else : ?>
-    <!-- MOSTRAMOS ACCESO A LAS PARADAS A INFORMAR -->
-    <!-- Cabecera de la web -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <!-- Cabecera de la web -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container-fluid">
             <!--Icono copiado de iconos en bootstrap-->
             <a class="navbar-brand" href="#">
@@ -26,17 +25,17 @@
             </button>
             <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="../home/panel_control.php">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Planificador de rutas</a>
+                <li class="nav-item">
+                    <a class="nav-link active" href="../home/panel_control.php">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Planificador de rutas</a>
 
-                    </li>
-                    <li class="nav_item">
-                        <a class="nav-link" href="#">Contacto</a>
-                    </li>
-                    <li class="nav-item">
+                </li>
+                <li class="nav_item">
+                    <a class="nav-link" href="#">Contacto</a>
+                </li>
+                <li class="nav-item">
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Informaci&oacute;n
@@ -47,7 +46,7 @@
                                         <a class="dropdown-item" href="#">Paradas</a>
                                     </div>
                                 </div>
-                    </li>
+                </li>
                 <!--Enlaces redes-->
                 <ul class="navbar-nav flex-row flex-wrap text-light">
                     <li class="nav-item col-6 col-md-auto p-3">
@@ -81,18 +80,15 @@
     <!-- Cuerpo de la web -->
     <nav>
         <div id="cabecera_pagina" class="container-fluid my-4">
-            <h1>Incidencias en l&iacute;neas de autob&uacute;s:</h1>
-        </div>
-        <div id="paradas_container" class="container-fluid my-4">
-            <table id="table_lineas" class="table custom-table">
-                <?php 
-                    require_once("../../controller/lineasController.php");
-                    // require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\controller\lineasController.php');
-                    $controller = new lineasController();
-                    $controller->displayAllLineas();
-                ?>
-            </table>
-        </div>
+            <h1>Planificador de rutas de la EMT: </h1>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="p_inicio" placeholder="Inicio (Número Calle)" aria-label="Inicio" aria-describedby="btn_ruta">
+                <input type="text" class="form-control" id="p_fin" placeholder="Destino (Número Calle)" aria-label="Destino" aria-describedby="btn_ruta">
+                <button class="btn btn-outline-warning" type="button" id="btn_ruta" onclick="planificadorControllerJs.sendRouteForm()">Buscar</button>
+            </div>
+
+            <div id="resultado-busqueda-ruta"></div>
     </nav>
+
     <?php require_once("footer.php"); ?>
 <?php endif ?>

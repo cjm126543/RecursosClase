@@ -34,7 +34,7 @@ class lineasControllerAjax {
         let div_titulo = document.getElementById("cabecera_pagina");
         let boton_volver = document.createElement('a');
         boton_volver.setAttribute('class', 'btn btn-outline-warning d-none d-md-inline-block');
-        // boton_volver.setAttribute('href', '/proyecto_siw/var/www/html/pruebas_Carlos/view/head/info-lineas.php');
+        // boton_volver.setAttribute('href', '/proyecto_siw/pruebas_Carlos/view/head/info-lineas.php');
         boton_volver.setAttribute('href', '/pruebas_Carlos/view/head/info-lineas.php');
         boton_volver.setAttribute('role', 'button');
         boton_volver.textContent = "Volver";

@@ -16,7 +16,7 @@ require_once("head.php");
                 <li class="nav-item">
                     <p class="navbar-brand" href="#">
                         <i class="bi bi-envelope"></i>
-                        <a href="#" class="text-warning">hola@transportemadrid.es</a>
+                        <a href="mailto:hola@transportemadrid.es" class="text-warning">hola@transportemadrid.es</a>
                     </p>
                 </li>
             </ul>
@@ -85,7 +85,7 @@ require_once("head.php");
                 </ul>
                 <!--Boton login y signup-->
                 <div class="boton-login">
-                    <!-- <a class="btn btn-outline-warning d-none d-md-inline-block" href="/proyecto_siw/var/www/html/pruebas_Carlos/view/home/login.php" role="button">Login</a> -->
+                    <!-- <a class="btn btn-outline-warning d-none d-md-inline-block" href="/proyecto_siw/pruebas_Carlos/view/home/login.php" role="button">Login</a> -->
                     <a class="btn btn-outline-warning d-none d-md-inline-block" href="/pruebas_Carlos/view/home/login.php" role="button">Login</a>
                     
                 </div>
@@ -102,7 +102,8 @@ require_once("head.php");
                             <a class="nav-link active" href="#">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Planificador de rutas</a>
+                            <!-- <a class="nav-link active" href="/proyecto_siw/pruebas_Carlos/view/head/plan-rutas.php">Planificador de rutas</a> -->
+                            <a class="nav-link active" href="../head/plan-rutas.php">Planificador de rutas</a>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
@@ -110,7 +111,7 @@ require_once("head.php");
                                     Informaci&oacute;n
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <!-- <a class="dropdown-item" href="/proyecto_siw/var/www/html/pruebas_Carlos/view/head/info-lineas.php">L&iacute;neas</a> -->
+                                    <!-- <a class="dropdown-item" href="/proyecto_siw/pruebas_Carlos/view/head/info-lineas.php">L&iacute;neas</a> -->
                                     <a class="dropdown-item" href="../head/info-lineas.php">L&iacute;neas</a>
                                     <a class="dropdown-item" href="#">Paradas</a>
                                 </div>
@@ -157,10 +158,14 @@ require_once("head.php");
                     </ul>
                     <!--Boton login y signup salimos desde panel de control asi que usamos su ruta!!!! Nos paso lo mismo con el home model y controller-->
                     <div class="boton-login">
-                        <!-- <a class="btn btn-outline-warning d-none d-md-inline-block" href="/proyecto_siw/var/www/html/pruebas_Carlos/view/home/logout.php" role="button">Cerrar sesión</a> -->
+                        <!-- <a class="btn btn-outline-warning d-none d-md-inline-block" href="/proyecto_siw/pruebas_Carlos/view/home/logout.php" role="button">Cerrar sesión</a> -->
                         <a class="btn btn-outline-warning d-none d-md-inline-block" href="../home/logout.php" role="button">Cerrar sesión</a>
                     </div>
-
+                    <?php if ($_SESSION['usuario'] === 'admin@admin.com') : ?>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-warning d-none d-md-inline-block" href="../home/admin.php">Manejar usuarios</a>
+                        </li>
+                    <?php endif; ?>
                 </div>
             <?php endif ?>
             </div>
