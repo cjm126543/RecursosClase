@@ -46,16 +46,16 @@ Aquí podemos registrar como se tratan y estructuran los diferentes datos en la 
 [Cómo utilizar Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 
 
-#### Comentarios de desarrollo
-##### Corregir
+### Comentarios de desarrollo
+#### Corregir
 - [ ] Buscador de paradas, integrado en la página de usuarios registrados pero no funciona.
         Recomiendo pasarlo a una página aparte y poder buscar también por nombre.
 - [ ] El desplegable react del menu principal y subpáginas no funciona.
-##### Pendiente
+#### Pendiente
 - [ ] Buscador de rutas (sólo de bus) para los usuarios registrados.
 - [ ] Generar PDFs y CSVs sobre las incidencias y PDF con imagen de la ruta calculada.
 - [x] Gestión de usuarios y CRUD de/por usuarios administradores.
-##### Novedades
+#### Novedades
 - (Feb/Mar 2023)   [Ivan]    Diseño de la página web, estilos implementados de bootstrap así como los contenedores y diferentes elementos react
                              de la web.
 - (Feb/Mar 2023)   [Ivan]    Implementación de la base de datos a la página web para el CRUD de usuarios. Implementado mediante encriptación de
