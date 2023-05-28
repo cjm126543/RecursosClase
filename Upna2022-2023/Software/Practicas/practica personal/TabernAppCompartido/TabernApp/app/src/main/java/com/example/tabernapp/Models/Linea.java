@@ -1,5 +1,8 @@
 package com.example.tabernapp.Models;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
@@ -7,10 +10,7 @@ import com.parse.ParseObject;
 public class Linea extends ParseObject {
 
     // Constructor
-    public Linea(Item aItem, int cantidad) {
-        setItem(aItem);
-        setCantidad(cantidad);
-    }
+    public Linea(){}
 
     // Getters and setters
     public Item getItem() {
@@ -31,6 +31,17 @@ public class Linea extends ParseObject {
 
     // Class methods
     public void addItemToPedido(Pedido pedido, Linea linea) {
-        new LineasPedido(pedido, linea); //TODO Deberia asociarse a una variable?
+        LineasPedido lp = new LineasPedido();
+        lp.setLinea(linea);
+        lp.setPedido(pedido);
+        lp.saveInBackground(e -> {
+            if (e == null) {
+                // correcto
+                Log.v("Saved", "Saved object successfully\n");
+            } else {
+                // error
+                Log.e("NoSaved", "Error trying to save object: " + lp.getObjectId() + "\n");
+            }
+        });
     }
 }

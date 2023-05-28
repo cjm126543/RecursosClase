@@ -29,12 +29,14 @@ int posicion;
 int colorRed;
 int colorGreen;
 int colorBlue;
+int resetGame;
 
 void setup()
 {
   // Declaracion de variables
   cont = 0;
   acierto = -1;
+  resetGame = 0;
   
   Serial.begin(115200);
   
@@ -74,7 +76,7 @@ void loop()
   
   const float p1 = analogRead(P1);
   
-  delay(100); // TODO no da tiempo a pulsacion y mostrarse el circulo, mirarlo
+  delay(100);
   Serial.print(b1);
   Serial.print(',');
   Serial.print(b2);
@@ -99,10 +101,10 @@ void loop()
     posicion = Serial.parseInt();
     colorGreen = Serial.parseInt();
     colorBlue = Serial.parseInt();
+    resetGame = Serial.parseInt();
   }
 
   // Activa vibracion o led dependiendo del acierto (o fallo)
-  // TODO mirar como podemos mezclar comportamiento del piezo y moneda
   if (acierto == 0) {
     digitalWrite(C1, HIGH);
     delay(500);
@@ -113,6 +115,14 @@ void loop()
     neoPixel.setPixelColor(cont, neoPixel.Color(0, colorGreen, colorBlue)); // 0 en rojo ya que solo mostraremos azul y verde
     neoPixel.show();
     cont++;
+  }
+  
+  if (start == 0 || restart == 0) {
+    neoPixel.begin();
+    neoPixel.clear();
+    neoPixel.show();
+    cont = 0;
+    acierto = -1;
   }
   delay(250);
 }

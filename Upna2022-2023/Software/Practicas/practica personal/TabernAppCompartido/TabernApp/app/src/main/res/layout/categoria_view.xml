@@ -26,7 +26,7 @@
             android:id="@+id/textInv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="290dp"
+            android:layout_marginLeft="225dp"
             android:layout_marginTop="75dp"
             android:text="@string/inventario" />
 
@@ -34,7 +34,7 @@
             android:id="@+id/textPrep1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="175dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="75dp"
             android:text="@string/preparacion" />
 
@@ -74,7 +74,7 @@
             android:id="@+id/textPrep2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="175dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="75dp"
             android:text="@string/preparacion" />
 
@@ -82,7 +82,7 @@
             android:id="@+id/textInv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="290dp"
+            android:layout_marginLeft="225dp"
             android:layout_marginTop="75dp"
             android:text="@string/inventario" />
 
@@ -122,7 +122,7 @@
             android:id="@+id/textPrep3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="175dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="75dp"
             android:text="@string/preparacion" />
 
@@ -130,7 +130,7 @@
             android:id="@+id/textInv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="290dp"
+            android:layout_marginLeft="225dp"
             android:layout_marginTop="75dp"
             android:text="@string/inventario" />
 
@@ -169,7 +169,7 @@
             android:id="@+id/textPrep4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="175dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="75dp"
             android:text="@string/preparacion" />
 
@@ -177,7 +177,7 @@
             android:id="@+id/textInv4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="290dp"
+            android:layout_marginLeft="225dp"
             android:layout_marginTop="75dp"
             android:text="@string/inventario" />
 

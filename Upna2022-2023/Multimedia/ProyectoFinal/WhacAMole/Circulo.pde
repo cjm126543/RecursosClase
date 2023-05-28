@@ -1,3 +1,7 @@
+/**
+*  Representa el circulo que se muestra durante el juego.
+*  @author Carlos Jimeno Miguel, Miguel Lopez de Vicente
+*/
 public class Circulo {
   
   // Atributos

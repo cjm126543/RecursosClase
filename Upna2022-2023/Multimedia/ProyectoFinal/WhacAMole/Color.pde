@@ -1,5 +1,9 @@
 import java.util.Random;
 
+/**
+*  Representa cada posible color del circulo durante el juego.
+*  @author Carlos Jimeno Miguel, Miguel Lopez de Vicente
+*/
 public enum Color {
   
   // Valores posibles

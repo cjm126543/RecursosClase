@@ -2,6 +2,12 @@ import processing.serial.*;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+*  Controlador del flujo del juego y los eventos enviados del/al
+*  arduino.
+*  @author Carlos Jimeno Miguel, Miguel Lopez de Vicente
+*/
+
 // Variables globales
 int pos;
 int contadorJuego;
@@ -147,12 +153,11 @@ void serialEvent(Serial p) {
 }
 
 // Metodos propios usados para el juego
-/*
+/**
 *    Este metodo se encarga de mostrar la puntuacion obtenida por
 *    el jugador hasta el momento y dibujar los circulos en pantalla.
 *    
-*    circulo: parámetro de entrada con la posicion del circulo
-*             a mostrar
+*    @param circulo posicion del circulo a mostrar
 */
 void comenzarJuego(int circulo) {
 
@@ -179,7 +184,7 @@ void comenzarJuego(int circulo) {
 *    correctamente y que puntos deben sumarse a la puntuacion actual
 *    del jugador.
 *
-*    num: parametro indicando la posicion del boton presionado
+*    @param num posicion del boton presionado
 */
 void actualizaPuntuacion(int num) {
     if (pos > -1 && num > -1) {
