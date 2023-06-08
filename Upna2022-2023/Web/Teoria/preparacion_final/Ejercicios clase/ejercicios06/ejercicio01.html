@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script>
+		function hola(texto) {
+			alert(texto);	
+		}
+
+		function cambiarcapa(texto) {
+			document.getElementById("micapa").innerHTML = texto;
+		} 
+		
+		function cambiar() {
+			var x = document.getElementById('texto').value;
+			document.getElementById('micapa').innerHTML = x;
+		}
+
+	</script>
+</head>
+<body onload="hola('Se ha cargado la página');">
+	<div>Esta es una prueba</div>
+	<input type="button" value="Pinchame" onclick="hola('Has pinchado en el botón');"><br>
+	<input type="button" value="Pinchame 2" onclick="cambiarcapa('Me has pinchado')"><br>
+	<img src="imagenes/paisaje01.jpg" alt="" width="200px" height="200px" onclick="hola('Has pinchado en la imagen')" onmouseOver="hola('Estas sobre la imagen')" onmouseout="hola('Has salido de la imagen')">
+	<div id="micapa">Esta es la segunda capa</div>
+	<input type="text" id='texto'>
+	<input type="button" value="Pinchame3" onclick="cambiar();">
+</body>
+</html>

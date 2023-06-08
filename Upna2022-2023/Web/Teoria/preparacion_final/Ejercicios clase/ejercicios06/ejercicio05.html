@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<script src="funciones.js"></script>
+
+	<script>
+		alert("hola");
+
+		function abrir() {
+			for (i = 0; i<5; i++) {
+				window.open();	
+			}
+		}
+	</script>
+</head>
+<body>
+	<form action="prueba.php" id="formulario">
+		Nombre*: <input type="text" name="nombre" id="nombre"><br>
+		Primer apellido*: <input type="text" name="apellido1" id="apellido1"><br>
+		Segundo apellido*: <input type="text" name="apellido2" id="apellido2"><br>
+		<input type="button" value="Enviar" onclick="validar();">
+	</form>	
+
+	<input type="button" value="Pinchame" onclick="abrir();">
+</body>
+</html>
