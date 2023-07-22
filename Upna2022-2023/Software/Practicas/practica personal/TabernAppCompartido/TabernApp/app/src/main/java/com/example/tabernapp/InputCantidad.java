@@ -38,6 +38,10 @@ public class InputCantidad extends DialogFragment {
         activity = getActivity();
         app = (TabernAppApplication) activity.getApplicationContext();
         basket = app.getCesta();
+        Bundle args = getArguments();
+        int type = args.getInt("tipo");
+        int prevQuant = args.getInt("prevQuant");
+
 
         // Dialog manipulation
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -49,7 +53,7 @@ public class InputCantidad extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         cantidad = (EditText) v.findViewById(R.id.quantity);
-                        int prev = basket.getCantidadArticulo(app.getCategoria().get(parent.getCard()));
+                        int prev = prevQuant;
                         int quant = 0;
                         String cant = cantidad.getText().toString();
                         if (!cant.isEmpty()) {
@@ -57,7 +61,7 @@ public class InputCantidad extends DialogFragment {
                         }
 
                         // Add item to basket
-                        app.updateCesta(app.getCategoria().get(parent.getCard()), quant);
+                        app.updateCesta(app.getCategoria(type).get(parent.getCard()), quant);
                         Intent intent = new Intent(activity, Compra.class);
                         startActivityForResult(intent, START_OK);
 

@@ -1,6 +1,6 @@
 <?php
-// require_once("../../controller/homeController.php");
-require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\controller\homeController.php');
+require_once("../../controller/homeController.php");
+// require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\controller\homeController.php');
 $obj = new homeController();
 $correo = $_POST['correo'];
 $contraseña = $_POST['contraseña'];

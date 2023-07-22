@@ -5,14 +5,18 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.tabernapp.Models.Direccion;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 
 public class InputDireccion extends DialogFragment {
 
@@ -44,15 +48,24 @@ public class InputDireccion extends DialogFragment {
                         nombre = (EditText) v.findViewById(R.id.name);
                         calle = (EditText) v.findViewById(R.id.road);
                         cPostal = (EditText) v.findViewById(R.id.postal_code);
-                        Direccion new_dir = new Direccion(nombre.getText().toString(),
-                                calle.getText().toString(), cPostal.getText().toString());
-                        app.addDirection(new_dir);
-
-                        // Check terminating status
-                        int code;
-                        if (app.addDirection(new_dir) == true) code = TERMINATED_OK;
-                        else code = TERMINATED_WRONG;
-                        activity.setResult(code, new Intent());
+                        Direccion dirToSrv = new Direccion();
+                        dirToSrv.setNombre(nombre.getText().toString());
+                        dirToSrv.setCalle(calle.getText().toString());
+                        dirToSrv.setcPostal(cPostal.getText().toString());
+                        dirToSrv.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    // Saved
+                                    Log.v("Saved", "Object: " + dirToSrv.getObjectId() + " saved successfully\n");
+                                } else {
+                                    // error
+                                    Toast.makeText(activity, "ERROR: " + e.getMessage() + "\n", Toast.LENGTH_SHORT).show();
+                                    Log.e("NoSaved", e.getMessage() + "\n");
+                                }
+                            }
+                        });
+                        activity.setResult(TERMINATED_OK, new Intent());
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

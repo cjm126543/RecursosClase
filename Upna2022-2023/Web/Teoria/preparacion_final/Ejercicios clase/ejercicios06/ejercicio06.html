@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+	<script>
+		function cambiar() {
+			document.getElementById("capa").innerHTML = "Se ha cambiado";
+			$("#capa").html("Este es el segundo texto");
+		}
+
+		$(document).ready(function() {
+			$("#boton2").click(
+				function()
+				{
+					alert("hola");
+				}
+			);
+			$("#boton3").click(
+				function()
+				{
+					alert("Soy el boton 3");
+				}
+			);			
+		});
+
+	</script>
+
+</head>
+<body>
+	<div id="capa">Esta es una prueba</div>
+	<input type="button" onclick="cambiar();" value="Pinchame"><br>
+	<input type="button" value="Pinchame2" id="boton2"><br>
+	<input type="button" value="Pinchame3" id="boton3">
+</body>
+</html>

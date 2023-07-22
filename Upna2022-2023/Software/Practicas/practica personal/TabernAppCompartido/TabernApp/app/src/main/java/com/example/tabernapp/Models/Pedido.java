@@ -1,5 +1,8 @@
 package com.example.tabernapp.Models;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseClassName;
@@ -15,17 +18,14 @@ import java.util.Map;
 @ParseClassName("Pedido")
 public class Pedido extends ParseObject {
 
-    // Attributes
-    private int totalArticulos;
-    private double totalPrecio;
-    private Direccion direccionEntrega;
-
     // Constructor
-    public Pedido() {
-        put("totalPrecio", 0.0);
-    }
+    public Pedido(){}
 
     // Getters and setters
+    public String getCliente() { return getString("nombreCli"); }
+
+    public void setCliente() { put("nombreCli", "Carlos"); }
+
     public int getTotalArticulos() {
         return getInt("totalArticulos");
     }
@@ -44,14 +44,29 @@ public class Pedido extends ParseObject {
             total += e.getKey().getPrecioUd() * e.getValue();
         }
         put("totalPrecio", total);
+        this.saveInBackground();
     }
 
     public Direccion getDireccionEntrega() {
-        return (Direccion) getParseObject("direccionEntrega");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Pedido");
+        Pedido p = this;
+        try {
+            p = (Pedido) query.get(this.getObjectId());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return (Direccion) p.getParseObject("direccionEntrega");
     }
 
     public void setDireccionEntrega(Direccion direccionEntrega) {
-        put("direccionEntrega", direccionEntrega);
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Pedido");
+        try {
+            Pedido ped = (Pedido) query.get(this.getObjectId());
+            ped.put("direccionEntrega", direccionEntrega);
+            ped.save();
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public int getCantidadArticulo(Item anItem) {
@@ -64,8 +79,10 @@ public class Pedido extends ParseObject {
                 if (e == null) {
                     // no hay error
                     listaLineas.add(objects);
+                    Log.v("Found", "Objects: " + objects.toString() + " was found\n");
                 } else {
                     // hay error
+                    Log.e("NoFound", "Objects were not found\n");
                 }
             }
         });
@@ -76,9 +93,7 @@ public class Pedido extends ParseObject {
             cantidad += l.getCantidad();
         }
         return cantidad;
-    } // TODO conseguir total de repeticiones de item
-
-    /*TODO NO PODEMOS TENER UN HASHMAP, TRABAJAR CON DB*/
+    }
 
     /**
      * Retrieve all items of the basket as a hashmap
@@ -86,46 +101,30 @@ public class Pedido extends ParseObject {
      * each item in the basket.
      */
     public HashMap<Item, Integer> getAllArticulos() {
-        final List<List<ParseObject>> listaLineas = new ArrayList<>();
+        List<LineasPedido> listaLineasPedido = new ArrayList<>();
         HashMap<Item, Integer> cestaArticulos = new HashMap<Item, Integer>();
 
         // pedir todas las lineas del pedido
         ParseQuery<ParseObject> query = ParseQuery.getQuery("LineasPedido");
-        query.whereEqualTo("linea", this);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {
-                if (e == null) {
-                    // no hay error
-                    listaLineas.add(objects);
-                } else {
-                    // hay error
-                }
-            }
-        });
+        query.whereEqualTo("pedido", this);
+        try {
+            listaLineasPedido = (List<LineasPedido>)(List<?>) query.find();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         // Pedir todos los items de las lineas
         ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Linea");
-        List<ParseObject> lineas = new ArrayList<ParseObject>();
-        lineas = listaLineas.get(0);
-        for (ParseObject linea: lineas) {
-            query2.getInBackground(linea.getObjectId(), (object, e) -> {
-                if (e == null) {
-                    // no hay error
-                    Linea obj = (Linea) object;
-                    cestaArticulos.put(obj.getItem(), obj.getCantidad());
-                } else {
-                    // hay errorS
-                }
-            });
+        for (LineasPedido lineaPed : listaLineasPedido) {
+            try {
+                Linea l = (Linea) query2.get(lineaPed.getLinea().getObjectId());
+                cestaArticulos.put(l.getItem(), l.getCantidad());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         return cestaArticulos;
     }
-
-    /**
-     * TODO REFACTORIZAR FUNCIONES PROPIAS PARA PODER MANIPULAR CLASES "LineasPedido" y "ArticuloPedido"
-     * TODO EN VEZ DE USAR EL HASHMAP.
-     */
 
     // Class methods
     /**
@@ -134,8 +133,18 @@ public class Pedido extends ParseObject {
      * @param cantidad Quantity of the added item
      */
     public void addArticulo(Item articulo, int cantidad) {
-        //this.cantidadArticulos.put(articulo, cantidad);
-        Linea l = new Linea(articulo, cantidad);
+        Linea l = new Linea();
+        l.setItem(articulo);
+        l.setCantidad(cantidad);
+        l.saveInBackground(e -> {
+            if (e == null) {
+                // correcto
+                Log.v("Saved", "Object saved successfully\n");
+            } else {
+                // error
+                Log.e("NoSaved", "Object could not be saved\n");
+            }
+        });
         l.addItemToPedido(this, l);
     }
 
@@ -146,12 +155,6 @@ public class Pedido extends ParseObject {
      * as an argument otherwise.
      */
     public Item removeArticulo(Item key) {
-/*        if (!cantidadArticulos.containsKey(key)) {
-            return null;
-        }
-        cantidadArticulos.remove(key);
-        return key;*/
-
         // Temp values used for fetch db's objects
         final Item[] val = {key};
         final Linea[] l = new Linea[1];
@@ -160,13 +163,15 @@ public class Pedido extends ParseObject {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Linea");
         query.whereEqualTo("item", key);
         query.findInBackground(new FindCallback<ParseObject>() {
-            @Override   //TODO SE PODRIA HACER CON getInBackground? Como conseguimos el ID del obj
+            @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null) {
                     // No hay error
                     l[0] = (Linea) objects.get(0);
+                    Log.v("Found", "Object: " + l[0].getObjectId() + " found\n");
                 } else {
                     val[0] = null;
+                    Log.e("NoFound", "Object was not found\n");
                 }
             }
         });
@@ -205,48 +210,37 @@ public class Pedido extends ParseObject {
      * Clears the hashmap in order to start a new basket.
      */
     public void removeAll() {
-        /*cantidadArticulos.clear();*/
-        final List<Linea>[] lineas = new List[]{new ArrayList<>()};
+        List<LineasPedido> lineas = new ArrayList<>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("LineasPedido");
         query.whereEqualTo("pedido", this);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {
-                if (e == null) {
-                    // no hay error
-                    lineas[0] = (List<Linea>)(List<?>) objects;
-                    for (int i = 0; i < objects.size(); ++i) {
-                        objects.get(i).deleteInBackground(new DeleteCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                if (e == null) {
-                                    // no hay error
-                                } else {
-                                    // hay error
-                                }
-                            }
-                        });
-                    }
-                } else {
-                    // hay error
-                }
+        try {
+            lineas = (List<LineasPedido>)(List<?>) query.find();
+            for (LineasPedido lineaP: lineas) {
+                lineaP.deleteInBackground();
             }
-        });
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Linea");
-        for (Linea linea : lineas[0]) {
-            query2.getInBackground(linea.getObjectId(), (object, e) -> {
+        for (LineasPedido lineaP : lineas) {
+            query2.getInBackground(lineaP.getLinea().getObjectId(), (object, e) -> {
                 if (e == null) {
                     // no hay error
+                    Log.v("Found", "Object: " + object.getObjectId() + " was found\n");
                     object.deleteInBackground(e2 -> {
                         if (e2 != null) {
                             // hay error
+                            Log.e("NoDeleted", "Object: " + object.getObjectId() + " could not be removed\n");
                         }
                     });
                 } else {
                     // hay error
+                    Log.e("NoFound", "Object was not found\n");
                 }
             });
         }
+        this.put("totalPrecio", 0.0);
+        this.saveInBackground();
     }
 }

@@ -2,18 +2,42 @@
 class homeController
 {
     private $MODEL;
-
+    private $db;
 
     public function __construct()
     {
-        // require_once("/var/www/html/pruebas_Carlos/model/homeModel.php");
-        require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\model\homeModel.php');
+        require_once("/var/www/html/pruebas_Carlos/model/homeModel.php");
+        require_once("/var/www/html/pruebas_Carlos/config/db.php");
+        // require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\model\homeModel.php');
+        // require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\config\db.php');
+        $this->db = new db();
         $this->MODEL = new homeModel();
     }
+
+    public function obtenerUsuarios()
+    {
+        $conexion = $this->db->conexion();
+        $query = "SELECT * FROM final_usuarios";
+        $stmt = $conexion->prepare($query);
+        $stmt->execute();
+        $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $usuarios;
+    }
+
     public function guardarUsuario($correo, $contraseña)
     {
         $valor = $this->MODEL->agregarNuevoUsuario($this->limpiarCorreo($correo), $this->encriptarContraseña($this->limpiarCadena($contraseña)));
         return $valor;
+    }
+
+    public function borrarUsuario($usuario_id)
+    {
+        $conexion = $this->db->conexion();
+        $query = "DELETE FROM final_usuarios WHERE id = :id";
+        $stmt = $conexion->prepare($query);
+        $stmt->bindParam(":id", $usuario_id, PDO::PARAM_INT);
+        $resultado = $stmt->execute();
+        return $resultado;
     }
     public function limpiarCadena($campo)
     {
@@ -45,7 +69,7 @@ class homeController
     function completarListaLineas() {
         $lineas = $this->MODEL->seleccionaAllLineas();
         for ($i = 0; $i < sizeof($lineas); $i++) {
-            echo '<option value="' . $lineas[$i]['label'] . '">' . $lineas[$i]['label'] . ": " . $lineas[$i]['nameA'] . " / " . $lineas[$i]['nameB'] . "</option>\n";
+            echo '<option value="' . $lineas[$i]['linea'] . '">' . $lineas[$i]['label'] . ": " . $lineas[$i]['nameA'] . " / " . $lineas[$i]['nameB'] . "</option>\n";
         }
     }
 }

@@ -5,8 +5,7 @@
 require_once("head.php");
 ?>
 
-
-<!--Copia de Valortic rancia-->
+<!--Ayuda para usuarios-->
 <nav class="navbar navbar-expand-md navbar-dark bg-black">
     <div class="container-fluid ">
         <div class="collapse navbar-collapse" id="menu">
@@ -17,7 +16,7 @@ require_once("head.php");
                 <li class="nav-item">
                     <p class="navbar-brand" href="#">
                         <i class="bi bi-envelope"></i>
-                        <a href="#" class="text-warning">hola@transportemadrid.es</a>
+                        <a href="mailto:hola@transportemadrid.es" class="text-warning">hola@transportemadrid.es</a>
                     </p>
                 </li>
             </ul>
@@ -37,43 +36,30 @@ require_once("head.php");
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <!--Elementos del menú colapsable usuario no logueado-->
+        <!--Elementos del menú usuario no logueado-->
         <?php if (empty($_SESSION['usuario'])) : ?>
             <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link active" href="#">Inicio</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contacto</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">Servicios</a>
-                        <ul class="dropdown-menu bg-secondary">
-                            <li>
-                                <a class="dropdown-item" href="">Servicio 1</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="">Servicio 2</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="">Servicio 3</a>
-                            </li>
-                        </ul>
-                    </li>
                     <li>
-                        <form>
-                            <label>Lineas</label>
-                            <select name="lineas" id="lin">
-                                <option selected="selected">Seleccione una linea</option>
-                                <?php 
-                                    // require_once("/var/www/html/pruebas_Carlos/controller/homeController.php");
-                                    require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\controller\homeController.php');
-                                    $controller= new homeController();
-                                    $controller->completarListaLineas();
-                                ?>
-                            </select>
-                        </form>
+                        <label>Lineas</label>
+                        <select name="lineas" id="lin" onchange="homeControllerJs.setLinea();">
+                            <option selected="selected">Seleccione una linea</option>
+                            <?php 
+                                require_once("/var/www/html/pruebas_Carlos/controller/homeController.php");
+                                // require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\controller\homeController.php');
+                                $controller= new homeController();
+                                $controller->completarListaLineas();
+                            ?>
+                        </select>
+                        <select name="sentido" id="way" onchange="homeControllerJs.setDireccion();">
+                            <option selected="selected">Seleccione sentido</option>
+                            <option value="1" id="ida"></option>
+                            <option value="2" id="vuelta"></option>
+                        </select>
+                        <button id="search_button" onclick="var a = homeControllerJs.getRoute();">BUSCAR</button>
                     </li>
                 </ul>
 
@@ -99,11 +85,13 @@ require_once("head.php");
                 </ul>
                 <!--Boton login y signup-->
                 <div class="boton-login">
-                    <a class="btn btn-outline-warning d-none d-md-inline-block" href="../../../prueba_servidor_completa/view/home/login.php" role="button">Login</a>
-
+                    <!-- <a class="btn btn-outline-warning d-none d-md-inline-block" href="/proyecto_siw/pruebas_Carlos/view/home/login.php" role="button">Login</a> -->
+                    <a class="btn btn-outline-warning d-none d-md-inline-block" href="/pruebas_Carlos/view/home/login.php" role="button">Login</a>
+                    
                 </div>
                 <div class="boton-login" style="margin-left: 10px;">
-                    <a class="btn btn-outline-warning d-none d-md-inline-block" href="view/home/signup.php" role="button">Register</a>
+                    <!-- <a class="btn btn-outline-warning d-none d-md-inline-block" href="view/home/signup.php" role="button">Register</a> -->
+                    <a class="btn btn-outline-warning d-none d-md-inline-block" href="/pruebas_Carlos/view/home/signup.php" role="button">Register</a>
                 </div>
 
             <?php else : ?>
@@ -114,21 +102,38 @@ require_once("head.php");
                             <a class="nav-link active" href="#">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contacto</a>
+                            <!-- <a class="nav-link active" href="/proyecto_siw/pruebas_Carlos/view/head/plan-rutas.php">Planificador de rutas</a> -->
+                            <a class="nav-link active" href="../head/plan-rutas.php">Planificador de rutas</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">Servicios + Servicios usuario logueado</a>
-                            <ul class="dropdown-menu bg-secondary">
-                                <li>
-                                    <a class="dropdown-item" href="">Servicio 1</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="">Servicio 2</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="">Servicio 3</a>
-                                </li>
-                            </ul>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Informaci&oacute;n
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <!-- <a class="dropdown-item" href="/proyecto_siw/pruebas_Carlos/view/head/info-lineas.php">L&iacute;neas</a> -->
+                                    <a class="dropdown-item" href="../head/info-lineas.php">L&iacute;neas</a>
+                                    <a class="dropdown-item" href="#">Paradas</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <label>Lineas</label>
+                            <select name="lineas" id="lin" onchange="homeControllerJs.setLinea();">
+                                <option selected="selected">Seleccione una linea</option>
+                                <?php 
+                                    require_once("../../controller/homeController.php");
+                                    // require_once('C:\xampp\htdocs\proyecto_siw\pruebas_Carlos\controller\homeController.php');
+                                    $controller= new homeController();
+                                    $controller->completarListaLineas();
+                                ?>
+                            </select>
+                            <select name="sentido" id="way" onchange="homeControllerJs.setDireccion();">
+                                <option selected="selected">Seleccione sentido</option>
+                                <option value="1" id="ida"></option>
+                                <option value="2" id="vuelta"></option>
+                            </select>
+                            <button id="search_button" onclick="var a = homeControllerJs.getRoute();">BUSCAR</button>
                         </li>
                     </ul>
                     <hr class="text-white-50">
@@ -153,24 +158,19 @@ require_once("head.php");
                     </ul>
                     <!--Boton login y signup salimos desde panel de control asi que usamos su ruta!!!! Nos paso lo mismo con el home model y controller-->
                     <div class="boton-login">
-                        <a class="btn btn-outline-warning d-none d-md-inline-block" href="logout.php" role="button">Cerrar sesión</a>
-
+                        <!-- <a class="btn btn-outline-warning d-none d-md-inline-block" href="/proyecto_siw/pruebas_Carlos/view/home/logout.php" role="button">Cerrar sesión</a> -->
+                        <a class="btn btn-outline-warning d-none d-md-inline-block" href="../home/logout.php" role="button">Cerrar sesión</a>
                     </div>
-
+                    <?php if ($_SESSION['usuario'] === 'admin@admin.com') : ?>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-warning d-none d-md-inline-block" href="../home/admin.php">Manejar usuarios</a>
+                        </li>
+                    <?php endif; ?>
                 </div>
             <?php endif ?>
             </div>
 </nav>
 
 <nav>
-    <div>
-        <!-- OPEN STREET MAPS SIN MARCADORES DE RUTA
-            <iframe class="container-fluid" 
-            src="https://www.openstreetmap.org/export/embed.html?bbox=-3.71188759803772%2C40.413201972925%2C-3.6977255344390874%2C40.420259460855284&amp;layer=mapnik" 
-            width="800" height="770" frameborder="0" style="border:0"  allowfullscreen></iframe>-->
-        
-        <iframe class="container-fluid" width="800" height="770" frameborder="0" style="border:0" allowfullscreen 
-        src="//umap.openstreetmap.fr/en/map/untitled-map_907418?scaleControl=false&miniMap=false&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=false&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false">
-        </iframe>
-    </div>
+    <div id="custom_map" style="height: 775px; border: 1px solid #AAA;"></div>
 </nav>

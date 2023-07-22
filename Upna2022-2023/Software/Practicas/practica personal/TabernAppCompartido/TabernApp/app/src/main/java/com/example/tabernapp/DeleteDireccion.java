@@ -6,11 +6,16 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
 import com.example.tabernapp.Models.Direccion;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 public class DeleteDireccion extends DialogFragment {
 
@@ -34,7 +39,7 @@ public class DeleteDireccion extends DialogFragment {
         // Activity variables used to manipulate the activity who calls the dialog
         activity = getActivity();
         app = (TabernAppApplication) activity.getApplicationContext();
-        int position = getArguments().getInt("position_dir");
+        String nom = getArguments().getString("nombre");
 
         // Dialog manipulation
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -45,12 +50,20 @@ public class DeleteDireccion extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // User deletes the direction
-                        Direccion dir = app.removeDirection(app.getDirecciones().get(position));
                         int code;
-                        if (!dir.equals(null)) code = TERMINATED_OK;
-                        else code = TERMINATED_WRONG;
-                        activity.setResult(code, new Intent());
+                        ParseQuery<ParseObject> query = ParseQuery.getQuery("Direccion");
+                        query.whereEqualTo("nombre", nom);
+                        try {
+                            Direccion dir = app.removeDirection((Direccion) query.find().get(0));
+                            Log.v("Deleted", "Object removed successfully\n");
+                            code = TERMINATED_OK;
+                        } catch (ParseException e) {
+                            Toast.makeText(parent, "ERROR: " + e.getMessage() + "\n", Toast.LENGTH_SHORT).show();
+                            Log.e("NoDeleted", e.getMessage() + "\n");
+                            code = TERMINATED_WRONG;
+                        }
                         parent.actualizaVista();
+                        activity.setResult(code, new Intent());
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
