@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">testListMVC</string>
-    <string name="nombre">Nombre</string>
-    <string name="latitud">Latitud</string>
-    <string name="longitud">Longitud</string>
-    <string name="confirmar">Hecho</string>
-</resources>

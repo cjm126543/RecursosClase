@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">testListSubactivity</string>
-    <string name="hello_main">Hello main!</string>
-    <string name="button_send">Open SubActivity</string>
-</resources>
