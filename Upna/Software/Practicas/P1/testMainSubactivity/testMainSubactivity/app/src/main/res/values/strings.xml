@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">testMainSubactivity</string>
+    <string name="hello_main">Hello main!</string>
+    <string name="button_send">Open SubActivity</string>
+    <string name="hello_sub">Hello sub!</string>
+    <string name="edit_message">Enter Text!</string>
+    <string name="button_return">Close SubActivity</string>
+    <string name="title_activity_display">DisplayActivity</string>
+</resources>

@@ -1,0 +1,23 @@
+Ejercicio servicios VS agregador web
+
+Servicio agregador:
+    Ventajas:
+        - Menor coste del desarrollo
+        - Actualización mas rápida
+        - Seguridad centralizada
+        - Codigo propio oculto en servidor
+
+    Desventajas:
+        - Punto unico de fallo
+        - Mayor coste economico (costes de despliegue y mantenimiento)
+        - Propenso a DoS/DDos
+
+Aplicacion Agregador:
+    Ventajas:
+        - Distribución permite ser mas tolerante al fallo
+        - Menor coste economico (despliegue en dispositivo propio y mantenimiento sencillo)
+
+    Desventajas:
+        - Mayor coste de desarrollo (Adaptar al sistema)
+        - Actualización mas lenta
+        - Codigo publicado en aplicacion, visible por lo tanto

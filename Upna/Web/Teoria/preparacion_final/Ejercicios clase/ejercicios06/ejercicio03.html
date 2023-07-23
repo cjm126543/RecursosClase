@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<script>
+		function cambiar(numero) {
+			var ruta = "imagenes/paisaje0" + numero + ".jpg";
+
+			document.getElementById("imagen").src = ruta;
+		}
+	</script>
+</head>
+<body>
+	<img src="imagenes/paisaje01.jpg" alt="" width="100px" height="100px" onclick="cambiar(1);">
+	<img src="imagenes/paisaje02.jpg" alt="" width="100px" height="100px"
+	onclick="cambiar(2)">
+	<img src="imagenes/paisaje03.jpg" alt="" width="100px" height="100px"
+	onclick="cambiar(3)">
+	<img src="imagenes/paisaje04.jpg" alt="" width="100px" height="100px"
+	onclick="cambiar(4)"><br><br>
+	<img src="imagenes/paisaje01.jpg" alt="" width="400px" height="400px" id="imagen">
+</body>
+</html>
