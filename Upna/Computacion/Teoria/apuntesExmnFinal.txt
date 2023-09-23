@@ -1,0 +1,94 @@
+Conceptos y notas de lo que entra en el final: (LOS NUMEROS DE DIAPOSITIVA SE HAN TOMADO DE ARRIBA A LA IZQ. NO DE LO PUESTO POR EL PROFE)
+
+# TEMA 1: ERROR Y APROXIMACION:
+	Entra el que son y como se calculan el error relativo y absoluto. Tambien es importante entender y saber que son las cifras significativas.
+	Si nos dan dos aproximaciones y no sabemos a que nos tenemos que acercar:
+		p1 = 0.817
+		p2 = 0.783
+		Calculemos el error relativo sobre el segundo: |0.811 - 0.783| / 0.783
+		
+# TEMA 2-1: RESOLUCION APROXIMADA DE ECUACIONES TRASCENDENTALES:
+	Los pasos a seguir deben conocerse y aplicarse (es el algoritmo general). Los teoremas de bolzano, de la unicidad de la raiz en un intervalo,
+	el teoriema del valor medio hay que saberlo. 
+	
+	Hay que saber como se acota el error para una aproximacion (diap. 8). Ejemplo: Dame la cota del error para: (m es las veces que derivas [la funcion original ya cuenta como 1 vez])
+	f(x) = x²-3 en [1,2] tomando como aprox. p=1.5
+	f'(x) = 2x -> |2x| >= 2 > 0 entonces, |p - 1.5| <= f(1.5) / 2
+	
+#######	Para los diferentes algoritmos de los temas: Cuando puedo aplicarlo (aunque no este seguro de que funcione)
+						     Cuando puedo garantizar que va a funcionar (condiciones que garanticen convergencia)
+						     Como se aplica / como funciona el método (implica explicar la condicion de parada)	####################################################
+	
+	Medida del error en el metodo de la bisección (diap. 17) ¿Cuantas iteraciones son necesarias para tener el error mas pequeño? Debe dar una condicion del estilo n >= (...)
+
+# TEMA 2-2: RESOLUCION APROXIMADA DE ECUACIONES TRASCENDENTALES parte 2:
+	Nota: diferencia entre secante y regula falsi:
+		partimos de pn y pn+1, calculamos pn+2
+			en secante: con pn+1 y pn+2 calculamos pn+3
+			en regula falsi: si f(pn) * f(pn+2) < 0
+					    f(pn+1) * f(pn+2) 	calculamos pn+3 con pn y pn+2.
+					    
+	Netwon-Raphson saberlo de puta madre. Si no se sabe que la ecuacion en el intervalo tiene cero simple o multiple es necesario hacer primero el paso de la diap. 48.
+	Si sabemos que es multiple tambien hay que hacerlo. Si sabemos que es simple no hay que hacerlo.
+		mu(xn) = f(xn) / f'(xn)
+	
+	Conocer que es un cero multiple y como se calcula si un cero es simple o multiple.
+	Un cero es multiple si: f(p) = f'(p) = 0 siendo p, un punto de la funcion que cumpla el enunciado.
+
+# TEMA 2-3: RESOLUCION APROXIMADA DE ECUACIONES TRASCENDENTALES parte 3:
+	Saber que son puntos fijos.
+	Tener un cero en una funcion es equivalente a tener un punto fijo en la funcion. f(p) = 0 == g(x) = x - f(x)
+	Ejemplo: Obtener un punto fijo de x³ - 7x + 3 = x es lo mismo que hallar un cero en x³ - 7x + 3 - x = x³ - 8x + 3
+	
+	DEMOSTRACIONES NO ENTRAN, ENTENDER Y SABER COMO APLICAR LAS COSAS NO COMO DEMOSTRAR DE DONDE VIENEN LOS TEOREMAS ETC.
+	LOS ORDENES DE CONVERGENCIA NO ENTRAN!! diap. 16 y 17.
+	
+	Los corolarios estaría bien comprenderlos, pero no los pregunta directamente.
+	
+	Metodo de Horner: Ejemplo:
+	Dado P(x) = x³ - 8x² + 7x - 3 y el punto x0 = 2
+		P(x) = (x - 2) * Q(x) + b0
+		Si nos pide resolver con horner podemos no aplicar el algoritmo y escribir como:
+		((x-8)x + 7)x - 3
+		
+	Si nos piden evaluar la derivada del polinomio en un punto usando Horner, se refiere a aplicar la diap.24.
+	Deflación conocerlo como explicarlo no aplicar en ejercicios.
+	Acotacion de Cardano-Vieta, Laguerre-Thibault y Netwon conocerlos.
+	
+	Metodo de Sturm: Saber hacerlo, conocerlo. Si no dice que las raices son simples debemos aplicar el teorema de la diap.42 (ESTO CAE SI O SI).
+	
+# TEMA 2-4: RESOLUCION DE SISTEMAS LINEAS:
+	Importante conocer el metodo de factorización LU.
+
+# TEMA 2-5 METODOS ITERATIVOS PARA RESOLUCION DE SISTEMAS LINEALES: 
+	No hace falta saber que es una norma vectorial. Pero si conocer la norma del radio espectral!
+	Metodos de Jacobi y Gauss-Seidel: Saber como funcionan, diferencias y ejercicios.
+	Conocer en estos metodos como se obtiene la forma de las ecuaciones que nos permiten comenzar con los metodos.
+	Conocer que es un numero de condición como concepto pero no entra para ejercicios.
+	Saber como medir el error.
+	Conocer que signifca que un sistema sea diagonal dominante por filas, reordenar para ver si se cumple y poder garantizar convergencia, si no se puede reordenar no se puede garantizar.
+	
+# TEMA 3-1: INTRO ALGORITMO GENETICO:
+	Que es, pseudo y pasos.
+	Por que es importante el cruzamiento y la mutacion y conocer todos los metodos de ambos.
+	Representación de problemas en algoritmos geneticos.
+	Ventajas de AGs.
+	Bases biologicas sudando.
+	Metodos de seleccion de progenitores (Ruleta, ranking, ...), conocer tambien los problemas asociados y como resolverlos.
+	
+# TEMA 3-2: INTRO AG 2:
+	Conocer y hacer ejercicios de la codificacion de Gray.
+	
+# TEMA fundamentos teoricos AG:
+	Saber que es un esquema, orden y longitud. Saber el teorema de la diap.21-22
+	Conocer que son los problemas engañosos.
+	Saber representar todas las poblaciones con la matriz Z. El resto de aproximacion markoviana no entra excepto diap.39 que se debe saber y va a caer si o si.
+
+# TEMA 4: CONTROL DE PARAMETROS:
+	Entender que es un algoritmo memético, donde se puede aplicar, porque quiero / que ventajas tiene aplicarlo (Pura teoría no ejercicios).
+
+# TEMA 5: GSA:
+	Saber todas las trasparencias y como hacer un ejercicio de ello. (No pedirá hacer el ejercicio entero, pedira hacer 1 o 2 iters o una parte intermedia del algoritmo. Puede que caiga el ejercicio completo).
+
+# TEMA 6:
+	Lo mismo que en el anterior, no hemos hecho ejercicios así que solo entra teoría. Especial hincapié en la diap. 8
