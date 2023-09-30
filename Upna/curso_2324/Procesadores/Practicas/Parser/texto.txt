@@ -1,0 +1,2 @@
+if variable != 10.0 do:
+    variable = variable + 2.2;
